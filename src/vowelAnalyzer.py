@@ -25,11 +25,15 @@ def main():
             inputFile = arg
         elif opt == "-o":
             outputDirectory = arg
-        assert False, "unhandled option"
+        #assert False, "unhandled option"
 
     # Only proceed if we have an input file
-    if inputFile != '':
-        print()
+    if inputFile != '' and outputDirectory != '':
+        teiParserObject = TeiParser(inputFile)
+        vowelCalcObject = VowelCalculator(teiParserObject.parse())
+        vowelResult = vowelCalcObject.calc()
+        chartExporterObject = ChartExporter(vowelResult[0], vowelResult[1], inputFile, outputDirectory)
+        chartExporterObject.export()
     else:
         print("Error: No input file provided")
 

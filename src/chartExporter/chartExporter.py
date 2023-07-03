@@ -3,10 +3,11 @@ from pygal import Config
 from pygal.style import Style
 
 class ChartExporter:
-    def __init__(self, labelData, data, title):
+    def __init__(self, labelData, data, title, outputFile):
         self.labelData = labelData
         self.data = data
         self.title = title
+        self.outputFile = outputFile
 
         self.style = Style(
             font_family = "Sans-serif",
@@ -27,5 +28,5 @@ class ChartExporter:
         chart.title = self.title
         chart.x_labels = self.labelData
         chart.add(self.title, self.data)
-        chart.render_to_file("export/test.svg")
+        chart.render_to_file(self.outputFile)
         return "ChartExporter.export() works"
