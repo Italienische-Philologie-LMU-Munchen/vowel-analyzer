@@ -2,6 +2,7 @@ import os
 import sys
 import venv
 import subprocess
+from dotenv import load_dotenv
 import PyInstaller.__main__
 
 # Source: https://stackoverflow.com/questions/12332975/how-can-i-install-a-python-module-within-code
@@ -49,8 +50,20 @@ else:
 # Run your script inside the virtual environment from here
 install(requirements_path)
 
-PyInstaller.__main__.run([
-    'src/vowelAnalyzer.py',
-    '--onefile',
-    '--console'
-])
+# Load values from .env file
+load_dotenv()
+appMode = os.getenv('APP_MODE')
+
+# Build app depending on env decision
+if appMode == 'console':
+    PyInstaller.__main__.run([
+        'src/vowelAnalyzer.py',
+        '--onefile',
+        '--console'
+    ])
+elif appMode == 'gui':
+    PyInstaller.__main__.run([
+        'src/vowelAnalyzerGui.py',
+        '--onefile',
+        '--windowed'
+    ])

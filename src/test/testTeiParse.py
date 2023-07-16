@@ -3,5 +3,5 @@ from teiParser import TeiParser
 
 def testTeiParser():
     teiParserObject = TeiParser(
-        "VowelAnalyzer/test/testData/DivinaCommedia.xml")
+        r"C:\Users\Resch\Documents\GitHub\vowel-analyzer\src\test\testData\DivinaCommedia.xml")
     print(teiParserObject.parse())
