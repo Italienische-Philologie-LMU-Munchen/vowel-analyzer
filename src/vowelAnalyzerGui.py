@@ -57,7 +57,7 @@ class VowelAnalyzerGui(QMainWindow):
                 vowelResult[0], vowelResult[1], self.filename, self.output)
             chartExporterObject.export()
 
-            self.wvResult.load(QUrl(self.output))
+            self.wvResult.load(QUrl("file:"+self.output)) 
 
 
 def main():
