@@ -52,7 +52,7 @@ class VowelAnalyzerGui(QMainWindow):
         if self.filename != '' and self.output != '':
             teiParserObject = TeiParser(self.filename)
             vowelCalcObject = VowelCalculator(teiParserObject.parse())
-            vowelResult = vowelCalcObject.calc()
+            vowelResult = vowelCalcObject.calcpercentage()
             chartExporterObject = ChartExporter(
                 vowelResult[0], vowelResult[1], self.filename, self.output)
             chartExporterObject.export()
