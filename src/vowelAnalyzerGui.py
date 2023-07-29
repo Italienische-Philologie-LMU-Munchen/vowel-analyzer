@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QCheckBox, QSizePolicy
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from teiParser import TeiParser
 from vowelCalculator import VowelCalculator
@@ -25,15 +25,19 @@ class VowelAnalyzerGui(QMainWindow):
         # Output button
         self.btOutputDir = QPushButton("Select output", self)
         self.btOutputDir.clicked.connect(self.selectOutput)
+        # Percentage toggle
+        self.cbPercentage = QCheckBox("Calculate\r\npercentages", self)
 
         # Geometry of buttons
         self.btFileSelect.setGeometry(10, 10, 100, 40)
         self.btAnalysis.setGeometry(10, 55, 100, 40)
         self.btOutputDir.setGeometry(10, 100, 100, 40)
+        self.cbPercentage.setGeometry(10, 145, 100, 40)
 
         # Webview to display result SVG
         self.wvResult = QWebEngineView(self)
-        self.wvResult.setGeometry(120, 10, 500, 500)
+        self.wvResult.setGeometry(
+            120, 10, self.width() - 150, self.height() - 50)
 
         # Storage attributes for file handling
         self.filename = ''
@@ -51,13 +55,26 @@ class VowelAnalyzerGui(QMainWindow):
     def runAnalysis(self):
         if self.filename != '' and self.output != '':
             teiParserObject = TeiParser(self.filename)
+
             vowelCalcObject = VowelCalculator(teiParserObject.parse())
-            vowelResult = vowelCalcObject.calcpercentage()
+            if (self.cbPercentage.isChecked()):
+                vowelResult = vowelCalcObject.calcpercentage()
+            else:
+                vowelResult = vowelCalcObject.calc()
+
             chartExporterObject = ChartExporter(
                 vowelResult[0], vowelResult[1], self.filename, self.output)
-            chartExporterObject.export()
+            if (self.cbPercentage.isChecked()):
+                chartExporterObject.exportPercentage()
+            else:
+                chartExporterObject.export()
 
-            self.wvResult.load(QUrl("file:"+self.output)) 
+            self.wvResult.load(QUrl("file:"+self.output))
+
+    def resizeEvent(self, event):
+        self.wvResult.setGeometry(
+            120, 10, self.width() - 150, self.height() - 50)
+        QMainWindow.resizeEvent(self, event)
 
 
 def main():
