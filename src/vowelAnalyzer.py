@@ -1,5 +1,6 @@
 import sys
 import getopt
+import os
 from teiParser import TeiParser
 from vowelCalculator import VowelCalculator
 from tableExporter import TableExporter
@@ -43,7 +44,7 @@ def main():
             vowelResult = vowelCalcObject.calc()
 
         chartExporterObject = ChartExporter(
-            vowelResult[0], vowelResult[1], inputFile, outputDirectory)
+            vowelResult[0], vowelResult[1], inputFile, os.path.splitext(os.path.basename(outputDirectory))[0])
         if (percentage):
             chartExporterObject.exportPercentage()
         else:

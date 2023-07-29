@@ -1,5 +1,9 @@
+import os
+import tempfile
+from shutil import copyfile
+from pathlib import Path
 from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QCheckBox, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QCheckBox
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from teiParser import TeiParser
 from vowelCalculator import VowelCalculator
@@ -23,8 +27,8 @@ class VowelAnalyzerGui(QMainWindow):
         self.btAnalysis = QPushButton("Run analysis", self)
         self.btAnalysis.clicked.connect(self.runAnalysis)
         # Output button
-        self.btOutputDir = QPushButton("Select output", self)
-        self.btOutputDir.clicked.connect(self.selectOutput)
+        self.btOutputDir = QPushButton("Export SVG", self)
+        self.btOutputDir.clicked.connect(self.export)
         # Percentage toggle
         self.cbPercentage = QCheckBox("Calculate\r\npercentages", self)
 
@@ -40,21 +44,29 @@ class VowelAnalyzerGui(QMainWindow):
             120, 10, self.width() - 150, self.height() - 50)
 
         # Storage attributes for file handling
+        self.filepath = ''
         self.filename = ''
         self.output = ''
 
-    def selectFile(self):
-        self.filename, filter = QFileDialog.getOpenFileName(self, 'Open file',
-                                                            'c:\\', "XML files (*.xml)")
+        # Create temp folder if not existing
+        self.temppath = Path(tempfile.gettempdir()) / "VowelAnalyzer"
+        self.temppath.mkdir(parents=True, exist_ok=True)
 
-    def selectOutput(self):
-        self.output = str(QFileDialog.getExistingDirectory(
-            self, "Select Directory")) + '/output.svg'
-        self.output = self.output
+    def selectFile(self):
+        baseDirectory = str(Path.home() / 'Desktop')
+        self.filepath, filter = QFileDialog.getOpenFileName(self, 'Open file',
+                                                            baseDirectory, "XML files (*.xml)")
+        self.filename = os.path.splitext(os.path.basename(self.filepath))[0]
+
+    def export(self):
+        self.output = Path(str(QFileDialog.getExistingDirectory(
+            self, "Select Directory")))
+        copyfile(str(self.temppath / (self.filename + '.svg')),
+                 str(self.output / (self.filename + '.svg')))
 
     def runAnalysis(self):
-        if self.filename != '' and self.output != '':
-            teiParserObject = TeiParser(self.filename)
+        if self.filepath != '':
+            teiParserObject = TeiParser(self.filepath)
 
             vowelCalcObject = VowelCalculator(teiParserObject.parse())
             if (self.cbPercentage.isChecked()):
@@ -63,13 +75,14 @@ class VowelAnalyzerGui(QMainWindow):
                 vowelResult = vowelCalcObject.calc()
 
             chartExporterObject = ChartExporter(
-                vowelResult[0], vowelResult[1], self.filename, self.output)
+                vowelResult[0], vowelResult[1], self.filename, str(self.temppath / (self.filename + '.svg')))
             if (self.cbPercentage.isChecked()):
                 chartExporterObject.exportPercentage()
             else:
                 chartExporterObject.export()
 
-            self.wvResult.load(QUrl("file:"+self.output))
+            self.wvResult.load(
+                QUrl("file:"+(self.temppath / (self.filename + '.svg')).as_posix()))
 
     def resizeEvent(self, event):
         self.wvResult.setGeometry(
