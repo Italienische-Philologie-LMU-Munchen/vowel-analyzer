@@ -4,13 +4,13 @@
 
 ## Installation/Prerequisities
 
-In order to merely run **Vowel Analyzer** you have to install Python 3.9 on your machine. This way you should be able to use the pre-built application files from the current release.
+In order to merely run **Vowel Analyzer** you have to install [Python 3.9](https://www.python.org/downloads/) on your machine (higher versions might work but haven't been tested yet). This way you should be able to use the pre-built application files from the current release.
 
 If you want (or need) to build your own version of **Vowel Analyzer**, you have to perform the following steps:
 
 - Download/Clone the source code
 - Install all needed Python packages with `pip install -r requirements.txt`
-- Run `build.py` to create a [single-file application] (https://github.com/s-resch/vowel-analyzer#building-your-own-bundled-executable) or just start `vowelAnalyzer.py` or `vowelAnalyzerGui.py`
+- Run `build.py` to create a [single-file application](https://github.com/s-resch/vowel-analyzer#building-your-own-bundled-executable) or just start `vowelAnalyzer.py` or `vowelAnalyzerGui.py`
 
 ## Usage
 
@@ -49,4 +49,5 @@ The following features are to be implemented in further versions of the software
 - Compare the results with standard distribution of vowels in a certain language
 - Try to reduce file size for bundled executable by PyInstaller
 - Improve startup performance of bundled executable by PyInstaller
+- Upgrade to Python 3.11 or higher
 - ...
