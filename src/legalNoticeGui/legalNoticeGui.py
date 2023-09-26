@@ -52,7 +52,9 @@ Enrico Fantini, LMU Munich and Sascha Resch, LMU Munich'''
         <br/><br/>
         python-dotenv: https://github.com/theskumar/python-dotenv, BSD License: Copyright (c) 2014, Saurabh Kumar (python-dotenv), 2013, Ted Tieken (django-dotenv-rw), 2013, Jacob Kaplan-Moss (django-dotenv)
         <br/><br/>
-        Free Fontawesome icons: https://fontawesome.com/,  SIL OFL 1.1 license'''
+        Free Fontawesome icons: https://fontawesome.com/,  SIL OFL 1.1 license
+        <br/><br/>
+        Pigar: https://github.com/damnever/pigar, BSD License: Copyright (c) 2020, XiaoChao Dong (@damnever) <dxc.wolf@gmail.com> All rights reserved.'''
 
         self.lbLegalTextLibraries = QTextEdit(self.legalTextLibraries, self)
         self.lbLegalTextLibraries.setReadOnly(True)

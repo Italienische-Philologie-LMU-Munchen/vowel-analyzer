@@ -14,9 +14,10 @@ def main():
                                    "help", "input=", "output=", "percentage"])
     except getopt.GetoptError as err:
         # print help information and exit:
-        print(err)  # will print something like "option -a not recognized"
+        print(err)  # print "option -a not recognized" or something similar
         sys.exit(2)
 
+    # Handle console line options and store them in appropriate variables
     inputFile = ''
     outputDirectory = ''
     percentage = False
@@ -31,18 +32,20 @@ def main():
             outputDirectory = arg
         elif opt == "-p":
             percentage = True
-        # assert False, "unhandled option"
 
     # Only proceed if we have an input file
     if inputFile != '' and outputDirectory != '':
+        # Create Tei Parser to read given file
         teiParserObject = TeiParser(inputFile)
 
+        # Calculate vowel results considering percentage mode
         vowelCalcObject = VowelCalculator(teiParserObject.parse())
         if (percentage):
             vowelResult = vowelCalcObject.calcpercentage()
         else:
             vowelResult = vowelCalcObject.calc()
 
+        # Save results into chart (svg file)
         chartExporterObject = ChartExporter(
             vowelResult[0], vowelResult[1], inputFile, os.path.splitext(os.path.basename(outputDirectory))[0])
         if (percentage):
