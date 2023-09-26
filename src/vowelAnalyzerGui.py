@@ -2,6 +2,7 @@ import os
 import tempfile
 import platform
 import ctypes
+import logging
 from shutil import copyfile
 from pathlib import Path
 from PyQt5.QtCore import QUrl
@@ -130,7 +131,7 @@ class VowelAnalyzerGui(QMainWindow):
         # If we have performed first analysis, we want to display percentage mode change directly in our window
         # So we rerun analysis
         if (self.analysisRun):
-            self.analysisRun(self)
+            self.runAnalysis()
 
     # Method to show legal notice window
     def legal(self):

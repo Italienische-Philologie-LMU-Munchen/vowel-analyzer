@@ -23,6 +23,17 @@ Using the application in GUI mode, you will see the following graphical interfac
 - Click `Export SVG` to save the chart with results (displayed in the main view on the right side of the application) to any directory of your machine
 - Click `Legal notice` to view information about the application and legal notices for libraries used
 
+## Building your own bundled executable
+
+In order to build your own bundled executable, you have to run `build.py`. The building process can take several minutes. In the end you should find an executable file in a newly created folder `dist`.
+
+You can change the type of application to be built using the `.env` file by changing the `APP_MODE` value:
+`APP_MODE=gui`
+or
+`APP_MODE=console`
+
+Be aware that the building process has been tested with on a Windows 11 64-bit machine. For other systems you might need to change the code of `build.py` and the PyInstaller configuration.
+
 ## Roadmap
 
 The following features are to be implemented in further versions of the software
@@ -31,8 +42,11 @@ The following features are to be implemented in further versions of the software
 - Support for Linux systems
 - Error handling for malformed TEI-XML documents
 - Error handling for other documents than TEI-XML documents
+- Logging of errors and warnings
 - Accept other texts than verse texts
 - Accept texts in other languages with specific vowel settings (diacritics)
 - Offer more types of charts to display the results
 - Compare the results with standard distribution of vowels in a certain language
+- Reduce file size for bundled executable by PyInstaller
+- Improve startup performance of bundled executable by PyInstaller
 - ...

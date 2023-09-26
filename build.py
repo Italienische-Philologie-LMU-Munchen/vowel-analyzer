@@ -58,12 +58,19 @@ appMode = os.getenv('APP_MODE')
 if appMode == 'console':
     PyInstaller.__main__.run([
         'src/vowelAnalyzer.py',
+        '--icon=src/assets/magnifying-glass-chart-solid.ico',
+        '--additional-hooks-dir=.',
         '--onefile',
         '--console'
     ])
 elif appMode == 'gui':
     PyInstaller.__main__.run([
         'src/vowelAnalyzerGui.py',
+        '--add-data=src/assets/magnifying-glass-chart-solid.svg;assets',
+        '--add-data=src/assets/scale-balanced-solid.svg;assets',
+        '--icon=src/assets/magnifying-glass-chart-solid.ico',
+        '--additional-hooks-dir=.',
         '--onefile',
-        '--windowed'
+        '--windowed',
+        '--debug=all'
     ])
