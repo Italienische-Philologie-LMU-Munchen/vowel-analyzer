@@ -16,6 +16,17 @@ If you want (or need) to build your own version of **Vowel Analyzer**, you have 
 - Install all needed Python packages with `pip install -r requirements.txt`
 - Run `build.py` to create a [single-file application](https://github.com/s-resch/vowel-analyzer#building-your-own-bundled-executable) or just start `vowelAnalyzer.py` or `vowelAnalyzerGui.py`
 
+## Special prerequisities for Mac M1 architecture
+
+The Mac M1 architecture (released in 2020) requires special actions in order to make Vowel Analyzer work.
+- In our test case it was necessary to install the needed libraries manually (so `pip install -r requirements.txt` didn't work)
+- We had to install PyQt5 separately - this requires several actions using M1 architecture
+  - Consider the following hints to install PyQt5 (Qt5 respectively) on your Mac: https://stackoverflow.com/a/76114212
+  - You need to enable an Intel terminal using Rosetta (see the instructions here: https://stackoverflow.com/a/74531940), make sure you have Rosetta installed
+  - Now you can open a terminal and type `intel`, to get an Intel terminal
+  - In this Intel terminal you can install PyQt5 libraries using `pip`: `pip install PyQt5` and `pip install PyQtWebEngine`
+
+
 ## Usage
 
 Using the application in GUI mode, you will see the following graphical interface:
