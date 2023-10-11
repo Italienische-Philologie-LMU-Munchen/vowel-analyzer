@@ -58,16 +58,16 @@ class VowelAnalyzerGui(QMainWindow):
         self.btLegalNotice.setIcon(QIcon(self.legal_icon))
 
         # Geometry of buttons
-        self.btFileSelect.setGeometry(10, 10, 100, 40)
-        self.btAnalysis.setGeometry(10, 55, 100, 40)
-        self.btOutputDir.setGeometry(10, 100, 100, 40)
-        self.cbPercentage.setGeometry(10, 145, 100, 40)
-        self.btLegalNotice.setGeometry(10, 190, 100, 40)
+        self.btFileSelect.setGeometry(10, 10, 120, 40)
+        self.btAnalysis.setGeometry(10, 55, 120, 40)
+        self.btOutputDir.setGeometry(10, 100, 120, 40)
+        self.cbPercentage.setGeometry(10, 145, 120, 40)
+        self.btLegalNotice.setGeometry(10, 190, 120, 40)
 
         # Webview to display result SVG
         self.wvResult = QWebEngineView(self)
         self.wvResult.setGeometry(
-            120, 10, self.width() - 150, self.height() - 50)
+            140, 10, self.width() - 170, self.height() - 50)
 
         # Storage attributes for file handling
         self.filepath = ''
@@ -140,7 +140,7 @@ class VowelAnalyzerGui(QMainWindow):
     # Method to handle resizing of window, so our widgets don't get distorted
     def resizeEvent(self, event):
         self.wvResult.setGeometry(
-            120, 10, self.width() - 150, self.height() - 50)
+            140, 10, self.width() - 170, self.height() - 50)
         QMainWindow.resizeEvent(self, event)
 
 

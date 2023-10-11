@@ -20,8 +20,8 @@ class LegalNoticeGui(QMainWindow):
         self.setWindowIcon(QIcon(self.window_icon))
 
         # Fixed geometry for startup of application
-        self.setGeometry(0, 0, 400, 400)
-        self.setMinimumSize(400, 400)
+        self.setGeometry(0, 0, 450, 450)
+        self.setMinimumSize(450, 450)
 
         # Heading for legal text to be displayed
         self.legalTextHeading = 'Legal Notice'
@@ -61,12 +61,12 @@ Enrico Fantini, LMU Munich and Sascha Resch, LMU Munich'''
 
         # Set geometry of widgets
         self.lbLegalTextHeading.setGeometry(10, 10, 300, 40)
-        self.lbLegalText.setGeometry(10, 55, 350, 100)
+        self.lbLegalText.setGeometry(10, 60, 420, 120)
         self.lbLegalTextLibraries.setGeometry(
-            10, 165, self.width() - 50, self.height() - 175)
+            10, 190, self.width() - 50, self.height() - 200)
 
     # Method to handle resizing of window, so widgets aren't distorted
     def resizeEvent(self, event):
         self.lbLegalTextLibraries.setGeometry(
-            10, 165, self.width() - 50, self.height() - 175)
+            10, 190, self.width() - 50, self.height() - 200)
         QMainWindow.resizeEvent(self, event)
