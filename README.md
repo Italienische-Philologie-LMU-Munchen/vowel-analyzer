@@ -1,6 +1,6 @@
 # Vowel Analyzer
 
-**Vowel Analyzer** is a small software to analyze vowel distribution in (old) Italian verse texts in TEI XML format. It can be used as console application or as a GUI application. The software has been developped mainlay on Windows machines, so you might get the ,ost reliable functionality using the application on a Windows machine.
+**Vowel Analyzer** is a small software to analyze vowel distribution in (old) Italian verse texts in TEI XML format. It can be used as console application or as a GUI application. The software has been developed mainly on Windows machines, so you might get the most reliable functionality using the application on a Windows machine.
 
 ## Background
 
