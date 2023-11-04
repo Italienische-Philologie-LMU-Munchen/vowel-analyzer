@@ -13,7 +13,7 @@ In order to merely run **Vowel Analyzer** you have to install [Python 3.9.7](htt
 For Windows users: If you want (or need) to install **Vowel Analyzer** with a shortcut on your desktop, please perform the following steps:
 
 - Download/Clone the source code
-- Run `install.ps1`- be aware that you have to run ps1-files by using a right-click and clicking 'Run with PowerShell'
+- Run `install.ps1` - be aware that you have to run ps1-files by using a right-click and clicking 'Run with PowerShell'
 - After the installation process you should see a shortcut on your desktop. By double-clicking the shortcut icon **VowelAnalyzer** should start in GUI mode
 
 ## Special prerequisities for Mac M1 architecture
@@ -34,6 +34,10 @@ Using the application in GUI mode, you will see the following graphical interfac
 
 - Click `Select file` to choose the TEI XML-file to be analyzed
 - Click `Run analysis` to perform the vowel calculation for the chosen TEI XML-file
+
+- You should see a similar output in the GUI:
+![GUI interface of Vowel Analyzer after analysis](/src/assets/vowel_analyzer_analysis.jpg)
+
 - Activate `Calculate percentages` to get results as percentages, if not activated the absolute number of vowels will be displayed
 - Click `Export SVG` to save the chart with results (displayed in the main view on the right side of the application) to any directory of your machine
 - Click `Legal notice` to view information about the application and legal notices for libraries used
