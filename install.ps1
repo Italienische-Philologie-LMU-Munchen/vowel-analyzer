@@ -21,23 +21,26 @@ Invoke-Expression $pipInstallCommand
 # Copy files from specified directory to AppData folder
 $sourceDirectory = "$(Get-Location)\src"
 $destinationDirectory = "$env:APPDATA\VowelAnalyzer"
-Write-Host "Emtyping $destinationDirectory..."
-# Using code from https://superuser.com/questions/1786887/how-to-delete-all-contents-of-a-folder-without-deleting-the-folder-itself
-Get-ChildItem -Path $destinationDirectory | ForEach-Object -Process { 
-    If($_.attributes -eq "Directory"){
-        Remove-Item -Path $_.FullName -Recurse -Force;
-        }Else{
-        Remove-Item -Path $_.FullName -Force;};
-        };
+# Using https://devblogs.microsoft.com/powershell-community/determine-if-a-folder-exists/ 
+Write-Host "Check if there is a previous installation of Vowel Anaylzer..."
+if (Test-Path -Path $destinationDirectory) 
+{
+    Write-Host "Emptying $destinationDirectory..."
+    # Using code from https://superuser.com/questions/1786887/how-to-delete-all-contents-of-a-folder-without-deleting-the-folder-itself
+    Get-ChildItem -Path $destinationDirectory | ForEach-Object -Process { 
+        If($_.attributes -eq "Directory"){
+            Remove-Item -Path $_.FullName -Recurse -Force;
+            }Else{
+            Remove-Item -Path $_.FullName -Force;};
+            };
+}
+else 
+{
+    Write-Host "Creating base directory $destinationDirectory..."
+    md -Path $destinationDirectory
+}
 Write-Host "Copying files from $sourceDirectory to $destinationDirectory..."
 Copy-Item -Path "$sourceDirectory\*" -Destination $destinationDirectory -Recurse
-
-# Create copy of one file to Desktop
-# $fileToCopy = "$destinationDirectory\file.txt"
-# $desktopPath = [Environment]::GetFolderPath("Desktop")
-# $destinationFile = "$desktopPath\file_copy.txt"
-# Write-Host "Creating copy of $fileToCopy at $destinationFile..."
-# Copy-Item -Path $fileToCopy -Destination $destinationFile
 
 # Create shortcut to start Vowel Analyzer on desktop
 # Using information from https://community.spiceworks.com/topic/2317514-powershell-how-can-i-change-the-icon-of-a-shortcut-to-a-custom-icon-file-i-have

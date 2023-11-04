@@ -18,12 +18,22 @@ if ($pythonVersion -like "2.*") {
 Write-Host "Starting Vowel Analyzer..."
 
 $pythonRunCommand = "$env:APPDATA\VowelAnalyzer\vowelAnalyzerGui.py"
-Start-Process $pythonRunCommand
+Start-Process $pythonCommand $pythonRunCommand
 
 Add-Type -AssemblyName UIAutomationClient
 
-$MyProcess = Get-Process | Where-Object {$_.MainWindowTitle -like "*C:\Windows\py.exe*"}
+do {
+    $MyProcessPy = Get-Process | Where-Object {$_.MainWindowTitle -like "*py.exe*"}
+    $MyProcessPython = Get-Process | Where-Object {$_.MainWindowTitle -like "*python.exe*"}
+} while ($MyProcessPy -eq $null -and $MyProcessPython -eq $null)
 $MyPowershellProcess = Get-Process -Id ([System.Diagnostics.Process]::GetCurrentProcess().Id)
+
+if (!($MyProcessPy -eq $null)) {
+    $MyProcess = $MyProcessPy
+}
+else {
+    $MyProcess = $MyProcessPython
+}
 
 $ae = [System.Windows.Automation.AutomationElement]::FromHandle($MyProcess.MainWindowHandle)
 $wp = $ae.GetCurrentPattern([System.Windows.Automation.WindowPatternIdentifiers]::Pattern)
