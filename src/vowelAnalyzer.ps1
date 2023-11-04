@@ -10,15 +10,15 @@ if ($pythonVersion -match "Python (\d+\.\d+\.\d+)") {
 
 # Install packages from requirements.txt using pip or pip3
 if ($pythonVersion -like "2.*") {
-    $pythonCommand = "python"
+    $pythonCommand = "python.exe"
 } else {
-    $pythonCommand = "python"
+    $pythonCommand = "python.exe"
 }
 
 Write-Host "Starting Vowel Analyzer..."
 
 $pythonRunCommand = "$env:APPDATA\VowelAnalyzer\vowelAnalyzerGui.py"
-Start-Process $pythonCommand $pythonRunCommand
+Start-Process $pythonCommand "`"$pythonRunCommand`""
 
 Add-Type -AssemblyName UIAutomationClient
 
