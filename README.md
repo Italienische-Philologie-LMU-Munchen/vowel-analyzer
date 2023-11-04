@@ -8,13 +8,13 @@ The software is the result of an introductory seminar to Python programming for 
 
 ## Installation/Prerequisities
 
-In order to merely run **Vowel Analyzer** you have to install [Python 3.9.7](https://www.python.org/downloads/) on your machine (other versions might work but haven't been tested yet). This way you should be able to use the pre-built application files from the current release (exe-files for Windows 64-bit machines).
+In order to merely run **Vowel Analyzer** you have to install [Python 3.9.7](https://www.python.org/downloads/) on your machine (other versions might work but haven't been tested yet). 
 
-If you want (or need) to build your own version of **Vowel Analyzer**, you have to perform the following steps:
+For Windows users: If you want (or need) to install **Vowel Analyzer** with a shortcut on your desktop, please perform the following steps:
 
 - Download/Clone the source code
-- Install all needed Python packages with `pip install -r requirements.txt`
-- Run `build.py` to create a [single-file application](https://github.com/s-resch/vowel-analyzer#building-your-own-bundled-executable) or just start `vowelAnalyzer.py` or `vowelAnalyzerGui.py`
+- Run `install.ps1`- be aware that you have to run ps1-files by using a right-click and clicking 'Run with PowerShell'
+- After the installation process you should see a shortcut on your desktop. By double-clicking the shortcut icon **VowelAnalyzer** should start in GUI mode
 
 ## Special prerequisities for Mac M1 architecture
 
@@ -38,17 +38,6 @@ Using the application in GUI mode, you will see the following graphical interfac
 - Click `Export SVG` to save the chart with results (displayed in the main view on the right side of the application) to any directory of your machine
 - Click `Legal notice` to view information about the application and legal notices for libraries used
 
-## Building your own bundled executable
-
-In order to build your own bundled executable, you have to run `build.py`. The building process can take several minutes. In the end you should find an executable file in a newly created folder `dist`.
-
-You can change the type of application to be built using the `.env` file by changing the `APP_MODE` value:
-`APP_MODE=gui`
-or
-`APP_MODE=console`
-
-Be aware that the building process has been tested with on a Windows 11 64-bit machine. For other systems you might need to change the code of `build.py` and the PyInstaller configuration.
-
 ## Roadmap
 
 The following features are to be implemented in further versions of the software
@@ -62,8 +51,6 @@ The following features are to be implemented in further versions of the software
 - Accept texts in other languages with specific vowel settings (diacritics)
 - Offer more types of charts to display the results
 - Compare the results with standard distribution of vowels in a certain language
-- Try to reduce file size for bundled executable by PyInstaller
-- Improve startup performance of bundled executable by PyInstaller
-- Maybe switch to another deployment/installer than PyInstaller (e.g., copying files into system directory (such as "Program Files" on Windows) and using .bat/.sh-file to start application)
+- Create deployment scripts for MacOS and Linux
 - Upgrade to Python 3.11 or higher
 - ...
